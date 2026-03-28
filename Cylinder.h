@@ -1,42 +1,38 @@
 #pragma once
+#include "point.h"
 /**
- * @brief класс Цилиндр
+ * @brief Класс Цилиндр
  */
 class Cylinder
 {
 private:
     /**
-     * @brief координаты центра основания
+     * @brief Центр нижнего основания
      */
-    double centerX, centerY, centerZ;
+    Point center;
     /**
-     *@brief радиус основания
+     * @brief Радиус основания
      */
     double radius;
     /**
-     * @brief высота цилиндра
+     * @brief Высота цилиндра
      */
     double height;
-
 public:
     /**
      * @brief Конструктор
-     * @param cx координата x центра основания
-     * @param cy координата y центра основания
-     * @param cz координата z центра основания
-     * @param r радиус основания
-     * @param h высота цилиндра
+     * @param c - координата центра основания (Точка)
+     * @param r - радиус основания
+     * @param h - высота цилиндра
      */
-    Cylinder(const double cx, const double cy, const double cz, const double r, const double h);
+    Cylinder(Point c, double r, double h);
     /**
-     * @brief вычисление объема цилиндра
+     * @brief Расчет объема цилиндра
      */
-    double getV() const;
+    double getVolume() const;
     /**
-     * @brief проверка, лежит ли точка в цилиндре
-     * @param x координата точки x
-     * @param y координата точки y
-     * @param z координата точки z
+     * @brief Проверка, лежит ли точка внутри цилиндра
+     * @param p - проверяемая точка
      */
-    bool PointInside(const double x, const double y, const double z) const;
+    bool PointInside(Point p) const;
 };
