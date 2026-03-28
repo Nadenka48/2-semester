@@ -1,11 +1,12 @@
 #include <iostream>
-#include "Cylinder.h"
+#include "point.h"
+#include "cylinder.h"
 /**
  * @brief Считывает значение, введенное с клавиатуры
  * @param report - строка информации
  * @return считанное значение
  */
-double getValue(const std::string report);
+double getValue(std::string report = "");
 /**
  * @brief Точка входа в программу
  * @return 0, если программа выполнена корректно
@@ -13,23 +14,25 @@ double getValue(const std::string report);
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    double centerX = getValue("Введите координату X центра:");
-    double centerY = getValue("Введите координату Y центра:");
-    double centerZ = getValue("Введите координату Z центра:");
-    double radius = getValue("Введите радиус цилиндра:");
-    double height = getValue("Введите высоту цилиндра:");
-    Cylinder myCylinder(centerX, centerY, centerZ, radius, height);
-    std::cout << "Объем цилиндра равен: " << myCylinder.getV() << std::endl;
-    double pointX = getValue("Введите координату X точки:");
-    double pointY = getValue("Введите координату Y точки:");
-    double pointZ = getValue("Введите координату Z точки:");
-    if (myCylinder.PointInside(pointX, pointY, pointZ))
+    double cx = getValue("Введите координату X центра: ");
+    double cy = getValue("Введите координату Y центра: ");
+    double cz = getValue("Введите координату Z центра: ");
+    Point center(cx, cy, cz);
+    double r = getValue("Введите радиус: ");
+    double h = getValue("Введите высоту: ");
+    Cylinder myCylinder(center, r, h);
+    std::cout << "\nОбъем цилиндра равен: " << myCylinder.getVolume() << std::endl;
+    double px = getValue("Введите X проверяемой точки: ");
+    double py = getValue("Введите Y проверяемой точки: ");
+    double pz = getValue("Введите Z проверяемой точки: ");
+    Point p(px, py, pz);
+    if (myCylinder.PointInside(p))
     {
-        std::cout << "Точка (" << pointX << ", " << pointY << ", " << pointZ << ") находится внутри цилиндра." << std::endl;
+        std::cout << "Точка находится ВНУТРИ цилиндра." << std::endl;
     }
     else
     {
-        std::cout << "Точка (" << pointX << ", " << pointY << ", " << pointZ << ") находится снраужи цилиндра." << std::endl;
+        std::cout << "Точка находится СНАРУЖИ цилиндра." << std::endl;
     }
 
     return 0;
