@@ -1,26 +1,36 @@
 #define _USE_MATH_DEFINES
+#include <iostream>
 #include <cmath>
-#include "Cylinder.h"
-Cylinder::Cylinder(const double cx, const double cy, const double cz, const double r, const double h)
+#include "cylinder.h"
+Cylinder::Cylinder(Point c, double r, double h)
 {
-    this->centerX = cx;
-    this->centerY = cy;
-    this->centerZ = cz;
+    this->center = c;
     this->radius = r;
     this->height = h;
+    if (r <= 0 || h <= 0)
+    {
+        std::cout << "Ошибка: Радиус и высота должны быть положительными!" << std::endl;
+        exit(1);
+    }
 }
-double Cylinder::getV() const
+double Cylinder::getVolume() const
 {
-    return M_PI * radius * radius * height;
+    return M_PI * this->radius * this->radius * this->height;
 }
-bool Cylinder::PointInside(const double x, const double y, const double z) const
+bool Cylinder::PointInside(Point p) const
 {
-    if (z < centerZ || z > centerZ + height)
+    if (p.getZ() < this->center.getZ() || p.getZ() > this->center.getZ() + this->height)
     {
         return false;
     }
-    double dx = x - centerX;
-    double dy = y - centerY;
-    double distanceFromAxis = std::sqrt(dx * dx + dy * dy);
-    return distanceFromAxis <= radius;
+    double dx = p.getX() - this->center.getX();
+    double dy = p.getY() - this->center.getY();
+    if ((dx * dx + dy * dy) <= (this->radius * this->radius))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
