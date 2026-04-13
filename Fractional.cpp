@@ -1,12 +1,11 @@
 #include "Fractional.h"
 #include <cmath>
 #include <cstdlib>
+#include <limits>
 void Fractional::reduce()
 {
     if (this->den == 0)
-    {
         return;
-    }
     long a = std::abs(this->num);
     long b = std::abs(this->den);
     while (b != 0)
@@ -73,18 +72,32 @@ Fractional Fractional::operator+(const double val) const
     Fractional temp(val);
     return *this + temp;
 }
+Fractional Fractional::operator-(const double val) const
+{
+    Fractional temp(val);
+    return *this - temp;
+}
+Fractional Fractional::operator*(const double val) const
+{
+    Fractional temp(val);
+    return *this * temp;
+}
+Fractional Fractional::operator/(const double val) const
+{
+    if (std::abs(val) < std::numeric_limits<double>::epsilon())
+    {
+        std::cout << "Ошибка, деление на ноль\n";
+        exit(1);
+    }
+    Fractional temp(val);
+    return *this / temp;
+}
 double Fractional::toDouble() const
 {
     return (double)this->num / this->den;
 }
-Fractional operator+(const double val, const Fractional f)
-{
-    return Fractional(val) + f;
-}
-Fractional operator*(const double val, const Fractional f)
-{
-    return Fractional(val) * f;
-}
+Fractional operator+(const double val, const Fractional f) { return Fractional(val) + f; }
+Fractional operator*(const double val, const Fractional f) { return Fractional(val) * f; }
 std::ostream &operator<<(std::ostream &os, const Fractional f)
 {
     os << f.num << "/" << f.den;
