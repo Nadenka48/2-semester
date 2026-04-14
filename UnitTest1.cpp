@@ -49,41 +49,40 @@ namespace Tests
     public:
         TEST_METHOD(Money_Sum_Success)
         {
-            Money m1(10, 50.0); // 1050 коп.
-            Money m2(5, 50.0);  // 550 коп.
+            Money m1(10, 50.0);
+            Money m2(5, 50.0); 
             Money result = m1 + m2;
             Assert::AreEqual(1600.0, result.toKopeks(), 0.01);
         }
         TEST_METHOD(Money_Sub_Success)
         {
-            Money m1(10, 50.0); // 1050 коп.
-            Money m2(2, 0.0);   // 200 коп.
+            Money m1(10, 50.0); 
+            Money m2(2, 0.0);  
             Money result = m1 - m2;
             Assert::AreEqual(850.0, result.toKopeks(), 0.01);
         }
         TEST_METHOD(Money_Div_Money_Success)
         {
-            Money m1(10, 0.0); // 1000 коп.
-            Money m2(2, 50.0); // 250 коп.
+            Money m1(10, 0.0); 
+            Money m2(2, 50.0); 
             double ratio = m1 / m2;
             Assert::AreEqual(4.0, ratio, 0.01);
         }
         TEST_METHOD(Money_Multiply_Double_Success)
         {
-            Money m(10, 0.0); // 1000 коп.
-            Money result = m.multiply(2.5);
+            Money m(10, 0.0);
+            Money result = m * 2.5; 
             Assert::AreEqual(2500.0, result.toKopeks(), 0.01);
         }
         TEST_METHOD(Money_Divide_Double_Success)
         {
-            Money m(10, 0.0); // 1000 коп.
-            Money result = m.divide(2.0);
+            Money m(10, 0.0); 
+            Money result = m / 2.0; 
             Assert::AreEqual(500.0, result.toKopeks(), 0.01);
-        }
         TEST_METHOD(Money_Copy_Constructor_Success)
         {
-            Money m1(15, 75.0); // 1575 коп.
-            Money m2(m1);       // Копируем
+            Money m1(15, 75.0); 
+            Money m2(m1); 
             Assert::AreEqual(1575.0, m2.toKopeks(), 0.01);
         }
     };
