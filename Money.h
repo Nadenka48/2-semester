@@ -1,13 +1,12 @@
 #pragma once
 #include "Fractional.h"
 /**
- * @brief Класс Деньги
+ * @brief Класс Деньги (использует Дробное число для точности вычислений)
  */
 class Money
 {
 private:
     Fractional kopeks;
-
 public:
     /**
      * @brief Конструктор, принимающий рубли и копейки
@@ -29,24 +28,25 @@ public:
      * @brief Конструктор копирования
      * @param other объект для копирования
      */
-    Money(const Money &other);
+    Money(const Money& other);
     /**
      * @brief Конструктор перемещения
      * @param other объект для перемещения
      */
-    Money(Money &&other);
+    Money(Money&& other);
     /**
      * @brief Оператор присваивания копированием
      * @param other присваиваемый объект
      * @return ссылка на текущий объект
      */
-    Money &operator=(const Money &other);
+    Money& operator=(const Money& other);
     /**
      * @brief Оператор присваивания перемещением
      * @param other присваиваемый объект
      * @return ссылка на текущий объект
      */
-    Money &operator=(Money &&other);
+    Money& operator=(Money&& other);
+
     /**
      * @brief Оператор сложения двух объектов класса Деньги
      * @param other вторая денежная сумма
@@ -66,17 +66,17 @@ public:
      */
     double operator/(const Money other) const;
     /**
-     * @brief Метод умножения на вещественное число
+     * @brief Оператор умножения на вещественное число
      * @param val число для умножения
      * @return рассчитанная денежная сумма
      */
-    Money multiply(const double val) const;
+    Money operator*(const double val) const;
     /**
-     * @brief Метод деления на вещественное число
+     * @brief Оператор деления на вещественное число
      * @param val число для деления
      * @return рассчитанная денежная сумма
      */
-    Money divide(const double val) const;
+    Money operator/(const double val) const;
     /**
      * @brief Метод преобразования денежной суммы в число (в копейки)
      * @return сумма в копейках
@@ -87,5 +87,12 @@ public:
      * @return считанный объект Деньги
      */
     static Money read();
+    /**
+     * @brief Дружественный оператор умножения вещественного числа на деньги
+     * @param val число для умножения
+     * @param m денежная сумма
+     * @return рассчитанная денежная сумма
+     */
+    friend Money operator*(const double val, const Money m);
     friend std::ostream &operator<<(std::ostream &os, const Money m);
 };
