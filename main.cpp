@@ -1,6 +1,9 @@
 #include <iostream>
 #include "DoublyLinkedList.h"
-
+/**
+*@brief Точка входа в программу
+*@return 0 если программа выполнена корректно, иначе 1
+*/
 int main()
 {
     DoublyLinkedList list{ 1, 2, 3, 4 };
